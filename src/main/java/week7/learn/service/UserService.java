@@ -1,7 +1,7 @@
 package week7.learn.service;
 
-import week7.learn.model.dto.ResponseData;
-import week7.learn.model.dto.UserDto;
+import week7.learn.model.dto.request.UserDto;
+import week7.learn.model.dto.response.ResponseData;
 
 public interface UserService {
     ResponseData<Object> register(UserDto request);

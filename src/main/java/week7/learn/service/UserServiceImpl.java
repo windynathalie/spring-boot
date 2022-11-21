@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import week7.learn.model.dto.ResponseData;
-import week7.learn.model.dto.UserDto;
+import week7.learn.model.dto.request.UserDto;
+import week7.learn.model.dto.response.ResponseData;
 import week7.learn.model.entity.DetailUser;
 import week7.learn.model.entity.User;
 import week7.learn.repository.DetailUserRepository;

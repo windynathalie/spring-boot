@@ -1,4 +1,4 @@
-package week7.learn.model.dto;
+package week7.learn.model.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

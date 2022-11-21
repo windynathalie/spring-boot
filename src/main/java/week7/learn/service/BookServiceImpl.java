@@ -11,8 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import week7.learn.model.dto.BookDto;
-import week7.learn.model.dto.ResponseData;
+import week7.learn.model.dto.request.BookDto;
+import week7.learn.model.dto.response.ResponseData;
 import week7.learn.model.entity.Book;
 import week7.learn.model.entity.BorrowBook;
 import week7.learn.model.entity.Category;
@@ -169,7 +169,7 @@ public class BookServiceImpl implements BookService {
                 responseData = new ResponseData<Object>(HttpStatus.BAD_REQUEST.value(),
                         "can't delete book because user currently borrow the book!", null);
             } else {
-                book.setDeleted(true);
+                book.setIsDeleted(true);
                 bookRepository.save(book);
                 responseData = new ResponseData<Object>(HttpStatus.OK.value(), "success", null);
             }

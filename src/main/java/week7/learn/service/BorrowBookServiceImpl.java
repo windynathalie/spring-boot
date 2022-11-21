@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import week7.learn.model.dto.BorrowBookDto;
-import week7.learn.model.dto.ResponseData;
+
+import week7.learn.model.dto.request.BorrowBookDto;
+import week7.learn.model.dto.response.ResponseData;
 import week7.learn.model.entity.Book;
 import week7.learn.model.entity.BorrowBook;
 import week7.learn.model.entity.User;
@@ -44,7 +45,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
         if (userOpt.isPresent() && bookOpt.isPresent()) {
             user = userOpt.get();
             book = bookOpt.get();
-            Optional<BorrowBook> borrowBookOpt = borrowBookRepository.findIdByBookAndUserAndUpdatedAt(book, user, null);
+            Optional<BorrowBook> borrowBookOpt = borrowBookRepository.findByBookAndUserAndUpdatedAt(book, user, null);
             if (borrowBookOpt.isPresent()) {
                 borrowBook = borrowBookOpt.get();
                 data = new HashMap<>();
@@ -62,7 +63,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
                     responseData = new ResponseData<Object>(HttpStatus.BAD_REQUEST.value(),
                             "Book cannot be borrowed because book has been borrowed by someone!", data);
                 } else {
-                    if (book.isDeleted() == false) {
+                    if (book.getIsDeleted().equals(false)) {
                         borrowBook = new BorrowBook(book, user);
                         borrowBook.setCreatedAt(LocalDateTime.now());
                         book.setStatus("borrowed");
@@ -97,7 +98,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
         if (userOpt.isPresent() && bookOpt.isPresent()) {
             user = userOpt.get();
             book = bookOpt.get();
-            Optional<BorrowBook> borrowBookOpt = borrowBookRepository.findIdByBookAndUserAndUpdatedAt(book, user, null);
+            Optional<BorrowBook> borrowBookOpt = borrowBookRepository.findByBookAndUserAndUpdatedAt(book, user, null);
             if (borrowBookOpt.isPresent()) {
                 borrowBook = borrowBookOpt.get();
                 borrowBook.setUpdatedAt(LocalDateTime.now());
@@ -148,7 +149,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
                 }
             } else {
                 if (borrowBookOpt1.isPresent()) {
-                    if (book.isDeleted() == false) {
+                    if (book.getIsDeleted().equals(false)) {
                         borrowBook = borrowBookOpt1.get();
                         borrowBook.getBook().setStatus("available");
                         borrowBook.setBook(book);
@@ -167,7 +168,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
                                 "Book cannot be borrowed because book has been deleted!", null);
                     }
                 } else {
-                    if (book.isDeleted() == false) {
+                    if (book.getIsDeleted().equals(false)) {
                         borrowBook = new BorrowBook(book, user);
                         borrowBook.setCreatedAt(LocalDateTime.now());
                         book.setStatus("borrowed");

@@ -27,7 +27,7 @@ public class Book {
     @Column(length = 100)
     private String author;
 
-    private boolean isDeleted = false;
+    private Boolean isDeleted = false;
 
     private String status = "available";
 

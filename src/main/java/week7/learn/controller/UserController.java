@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import week7.learn.model.dto.ResponseData;
-import week7.learn.model.dto.UserDto;
+import week7.learn.model.dto.request.UserDto;
+import week7.learn.model.dto.response.ResponseData;
 import week7.learn.service.UserService;
 
 @RestController

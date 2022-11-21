@@ -36,7 +36,7 @@ public class User implements Serializable {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    private boolean isDeleted = false;
+    private Boolean isDeleted = false;
 
     // @OneToOne(mappedBy = "userId")
     // private DetailUser detailUserId;

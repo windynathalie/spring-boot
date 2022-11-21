@@ -17,10 +17,12 @@ public interface BorrowBookRepository extends JpaRepository<BorrowBook, Long> {
 
     Optional<BorrowBook> findIdByBookAndUpdatedAt(Book book, LocalDateTime updatedAt);
 
+    List<BorrowBook> findByUser(User user);
+
     List<BorrowBook> findByUpdatedAtNotNull();
 
     List<BorrowBook> findByUpdatedAtNull();
 
-    Optional<BorrowBook> findIdByBookAndUserAndUpdatedAt(Book book, User user,
+    Optional<BorrowBook> findByBookAndUserAndUpdatedAt(Book book, User user,
             LocalDateTime updatedAt);
 }

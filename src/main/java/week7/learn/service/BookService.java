@@ -1,7 +1,7 @@
 package week7.learn.service;
 
-import week7.learn.model.dto.BookDto;
-import week7.learn.model.dto.ResponseData;
+import week7.learn.model.dto.request.BookDto;
+import week7.learn.model.dto.response.ResponseData;
 
 public interface BookService {
     ResponseData<Object> createBook(BookDto requesDto);
