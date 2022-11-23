@@ -3,7 +3,7 @@ package week7.learn.validator;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import week7.learn.exception.customException.CustomBadRequestException;
 import week7.learn.exception.customException.CustomNotFoundException;
@@ -11,7 +11,7 @@ import week7.learn.exception.customException.CustomNotFoundException;
 import week7.learn.model.entity.BorrowBook;
 import week7.learn.model.entity.User;
 
-@Component
+@Service
 public class BorrowValidator {
 
     private BorrowBook borrowBook;

@@ -2,12 +2,12 @@ package week7.learn.validator;
 
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import week7.learn.exception.customException.CustomNotFoundException;
 import week7.learn.model.entity.Book;
 
-@Component
+@Service
 public class BookValidator {
     public void validateBookNotFound(Optional<Book> bookOpt) throws CustomNotFoundException {
         if (bookOpt.isEmpty()) {

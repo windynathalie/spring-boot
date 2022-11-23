@@ -1,19 +1,24 @@
 package week7.learn.exception;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import week7.learn.exception.customException.CustomBadRequestException;
 import week7.learn.exception.customException.CustomNotFoundException;
+import week7.learn.exception.customException.CustomUnauthorizedException;
 import week7.learn.model.dto.response.ErrorMessage;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
     private ErrorMessage<Object> errorMessage;
+    private Map<Object, Object> errors;
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Object> handleExceptionGlobal(Exception e) {
@@ -36,4 +41,21 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(errorMessage.getStatus()).body(errorMessage);
     }
 
+    @ExceptionHandler(value = CustomUnauthorizedException.class)
+    public ResponseEntity<Object> handleUnauthorizedException(CustomUnauthorizedException e) {
+        errorMessage = new ErrorMessage<Object>(HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now(),
+                e.getMessage(), null);
+        return ResponseEntity.status(errorMessage.getStatus()).body(errorMessage);
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        errors = new HashMap<>();
+
+        e.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+
+        errorMessage = new ErrorMessage<Object>(HttpStatus.BAD_REQUEST.value(), LocalDateTime.now(),
+                "Error Validation", errors);
+        return ResponseEntity.status(errorMessage.getStatus()).body(errorMessage);
+    }
 }
